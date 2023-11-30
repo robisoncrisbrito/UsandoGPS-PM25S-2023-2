@@ -2,6 +2,7 @@ package br.edu.utfpr.usandogps_pm25s_2023_2
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     fun btVerMapaOnClick(view: View) {
-
+        val intent = Intent( this, MapsActivity::class.java )
+        startActivity( intent )
     }
 }
