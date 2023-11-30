@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "br.edu.utfpr.usandogps_pm25s_2023_2"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.edu.utfpr.usandogps_pm25s_2023_2"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
