@@ -11,7 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.URL
 
 class MainActivity : AppCompatActivity(), LocationListener {
 
@@ -61,5 +65,39 @@ class MainActivity : AppCompatActivity(), LocationListener {
     fun btVerMapaOnClick(view: View) {
         val intent = Intent( this, MapsActivity::class.java )
         startActivity( intent )
+    }
+
+    fun btVerEnderecoOnClick(view: View) {
+
+        Thread( Runnable {
+            val saida = StringBuilder()
+
+            val endereco = "https://maps.googleapis.com/maps/api/geocode/xml?latlng=-26.0751195,-53.0613228&key=AIzaSyC2ybvH1PwXU_HFwHH2iCC9Dg1BhnPrMcY"
+
+            val url = URL( endereco )
+            val urlConnection = url.openConnection()
+
+            val inputStream = urlConnection.getInputStream()
+            val entrada = BufferedReader( InputStreamReader( inputStream ) )
+
+            var linha = entrada.readLine()
+
+            while( linha != null ) {
+                saida.append( linha )
+                linha = entrada.readLine()
+            }
+
+            val local = saida.substring( saida.indexOf( "<formatted_address>") + 19, saida.indexOf( "</formatted_address>" ))
+
+            runOnUiThread {
+                Toast.makeText(this, local, Toast.LENGTH_LONG).show()
+            }
+
+
+        } ).start()
+
+
+
+
     }
 }
